@@ -1,5 +1,6 @@
 
 ;movies and their attribute representation
+;movieId and userId act as our primary key
 ;comedies
 (movie Movie1 Title "Freaky Friday" Genre Comedy Director "Mark Waters")
 (movie Movie2 Title "The Addams" Genre Comedy Director "Barry Sonnenfeld")
@@ -26,9 +27,9 @@
 (movie Movie15 Title "Get Out" Genre Drama Director "Jordan Peele")
 
 ;User Preference
-(user user1 Jane Preferences [Action SciFi] Watched [Movie7 Movie6])
-(user user2 Ophelia Preferences Horror Watched Movie13)
-(user user3 Angela Preferences Drama Watched Movie10)
+(user user1 Jane Preferences (Action SciFi) Watched (Movie7 Movie6))
+(user user2 Ophelia Preferences (Horror Comedy) Watched (Movie13 Movie2))
+(user user3 Angela Preferences (Action Drama ) Watched (Movie7 Movie10))
 
 ;Define Relationship
 (genre-similarity Action SciFi High)
@@ -47,31 +48,43 @@
 ;get recommendation function
 ;retrives movies from the dataset
 (= (getMovies $movieGenre)
-    (match &self (movie $MovieId Title $movieTitle Genre $movieGenre Director $directorName) ($movieTitle))
+    (match &self (movie $MovieId Title $movieTitle Genre $movieGenre Director $directorName) ($MovieId $movieTitle))
 )
 (getMovies Action)
 
 ;retrives the movies the user likes
-(= (getUserPreference $userId)
-    (match &self (user $userId $userName Preferences [$userPreference...] Watched [$movieWatched...]) [$userPreference] )
+(= (getUserPreference $movieWatched)
+    (match &self (user $userId $userName Preferences $userPreference Watched $movieWatched) (superpose $userPreference))
 )
-!(getUserPreference user1)
+(getUserPreference user3)
 
-(= (getRecommendation $MovieId)
-    (let*
-        (  
-            ($userMovie (getUserPreference $userPreference))
-            ($databaseMovie (getMovies $movieGenre))
-            ($commonMovie (intersection-atom $userMovie $databaseMovie))
-        )
-        (if (== $commonMovie ())
-            ()
-            $movieTitle
-        )
-    )
-)
 
-(getRecommendation Movie5)
+;(= (getRecommendation $userId)
+    ;(match &self (user $userId $userName Preferences $userPreference Watched $movieWatched) $userPreference)
+    ;(match &self (movie $MovieId Title $movieTitle Genre $movieGenre Director $directorName) $movieGenre $movieTitle)
+    ;(if (== $userPreference $movieGenre)
+        ;$movieTitle
+        ;()
+    ;)
+
+;)
+
+
+;(= (getRecommendation $userId)
+    ;(let*
+        ;(  
+            ;($userMovie (getUserPreference $movieWatched))
+            ;($databaseMovie (getMovies $movieId))
+            ;($commonMovie (intersection-atom $userMovie $databaseMovie))
+        ;)
+        ;(if (== $commonMovie ())
+            ;$movieGenre
+            ;()
+        ;)
+    ;)
+;)
+
+;!(getRecommendation user1)
 
 
 
