@@ -1,3 +1,4 @@
+
 ; Movies and their attribute representation
 (movie Movie1 Title "Freaky Friday" Genre Comedy Director "Mark Waters")
 (movie Movie2 Title "The Addams" Genre Comedy Director "Barry Sonnenfeld")
@@ -42,12 +43,42 @@
 (likesDirector user3 "Anthony Russo")  ; From watching Avengers
 (likesDirector user3 "Marc Cherry")  ; From watching Desperate Housewives
 
+; Working approach - using filter logic (THIS ONE WORKS!)
+(= (recommend $userId)
+    (collapse
+        (match &self (movie $movieId Title $title Genre $genre Director $director)
+            (match &self (likes $userId $genre)
+                ; Create a conditional check
+                (let $isWatched (collapse (match &self (watched $userId $movieId) True))
+                    (if (== $isWatched (True))
+                        () ; Skip if watched
+                        (str $title " - Recommended because you like " $genre " movies") ; Recommend if not watched
+                    )
+                )
+            )
+        )
+    )
+)
 
-(= (recommend $userId)(collapse(match &self (movie $movieId Title $title Genre $genre Director $director)(match &self (likes $userId $genre)(let $isWatched (collapse (match &self (watched $userId $movieId) True))(if (== $isWatched (True))() (str $title " - Recommended because you like " $genre " movies") ))))))
+; Director-based recommendation function
+(= (recommendByDirector $userId)
+    (collapse
+        (match &self (movie $movieId Title $title Genre $genre Director $director)
+            (match &self (likesDirector $userId $director)
+                ; Create a conditional check
+                (let $isWatched (collapse (match &self (watched $userId $movieId) True))
+                    (if (== $isWatched (True))
+                        () ; Skip if watched
+                        (str $title " - Recommended because you liked other movies by " $director) ; Recommend if not watched
+                    )
+                )
+            )
+        )
+    )
+)
 
-(= (recommendByDirector $userId)(collapse(match &self (movie $movieId Title $title Genre $genre Director $director)(match &self (likesDirector $userId $director)(let $isWatched (collapse (match &self (watched $userId $movieId) True))(if (== $isWatched (True))() (str $title " - Recommended because you liked other movies by " $director) ))))))
-
-(= (recommendCollaborativeAdvanced $userId)(collapse(match &self (likes $otherUser $genre)(if (== $userId $otherUser)()(match &self (likes $userId $genre)(match &self (watched $otherUser $movieId)(let $targetWatched (collapse (match &self (watched $userId $movieId) True))(if (== $targetWatched (True))()(match &self (movie $movieId Title $title Genre $movieGenre Director $director)(str $title " - Similar user (" $otherUser ") who likes " $genre " also watched this"))))))))))
 
 
-
+; Test all recommendation types
+(recommend user1)
+!(recommendByDirector user1)
