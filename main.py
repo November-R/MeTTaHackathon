@@ -29,19 +29,23 @@ def load_metta_file(knowledgeGraph):
     except FileNotFoundError:
         print(f"The file {knowledgeGraph} was not found")
 
+
 def execute_query(query: str):
     result = metta.run(query)
     cleaned = []
     for r in result:
-        text = str(r)
-        # remove outer brackets and quotes, then join tokens
-        text = text.replace("(", "").replace(")", "").replace('"', "")
-        parts = text.split()
-        cleaned.append(" ".join(parts))
-    return cleaned
-    
-    #return [str(r) for r in result]
+        text = str(r).replace("(", "").replace(")", "").replace('"', "").strip("[]")
 
+        # Try to split into movie + reason
+        if "-" in text:
+            title, reason = text.split("-", 1)
+            cleaned.append({
+                "title": title.strip(),
+                "reason": reason.strip()
+            })
+        else:
+            cleaned.append({"title": text.strip(), "reason": ""})
+    return cleaned
 
 
 # Load knowledge base first

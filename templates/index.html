@@ -4,9 +4,50 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Movie Recommendation System</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href=static/style.css>
     </head>
     <body>
-        
+       <header>
+        <h1>Movie Recommender</h1>
+        <p>Are you looking for something good to watch...🤔😄?</p>
+       </header>
+       <div class="generalContainer">
+            <div class="userContainer" id="userContainer"></div>
+                <h2>Who is watching</h2>
+                <select>
+                    <option value="">Choose an option</option>
+                    <option value="user1">Jane</option>
+                    <option value="user2">Ophelia</option>
+                    <option value="user3">Angela</option>
+                </select>
+            </div>
+            <div class="userContainer" id="recommendationContainer">
+                <h2>Movies you need to watch ASAP</h2>
+
+            </div>
+            <div class="userContainer" id="preferenceContainer">
+                <h2>Update your movie Preference</h2>
+                <input type="text" id="genreInput" placeholder="eg: Comedy, Action..." required>
+                <button type="Submit" id="btn">Update my preference</button>
+            </div>
+            <div class="userContainer" id="feedbackContainer">
+                <h2>Rate Movies</h2>
+                <input type="text" id="movieNameInput" placeholder="Movie name you want to rate">
+                <select>
+                    <option value="">Choose the ratings</option>
+                    <option value="">1 Absolutely Horrendus</option>
+                    <option value="">2 Just Bad</option>
+                    <option value="">3 its okay</option>
+                    <option value="">4 Amaizing</option>
+                    <option value="">5 Mindblowing and lifechanging</option>
+
+                </select>
+            </div>
+            <div class="userContainer" id="historyContainer">
+                <h2>View your Watch history</h2>
+                <button type="Submit" id="btn">View my watch history</button>
+            </div>
+       </div>
+       <script src="static/script.js"></script>
     </body>
 </html>

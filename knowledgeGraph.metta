@@ -43,11 +43,11 @@
 (likesDirector user3 "Marc Cherry")  ; From watching Desperate Housewives
 
 
-(= (recommend $userId)(collapse(match &self (movie $movieId Title $title Genre $genre Director $director)(match &self (likes $userId $genre)(let $isWatched (collapse (match &self (watched $userId $movieId) True))(if (== $isWatched (True))() (str $title " - Recommended because you like " $genre " movies") ))))))
+(= (recommend $userId)(collapse(match &self (movie $movieId Title $title Genre $genre Director $director)(match &self (likes $userId $genre)(let $isWatched (collapse (match &self (watched $userId $movieId) True))(if (== $isWatched (True))() ($title " - Recommended because you like " $genre " movies") ))))))
 
-(= (recommendByDirector $userId)(collapse(match &self (movie $movieId Title $title Genre $genre Director $director)(match &self (likesDirector $userId $director)(let $isWatched (collapse (match &self (watched $userId $movieId) True))(if (== $isWatched (True))() (str $title " - Recommended because you liked other movies by " $director) ))))))
+(= (recommendByDirector $userId)(collapse(match &self (movie $movieId Title $title Genre $genre Director $director)(match &self (likesDirector $userId $director)(let $isWatched (collapse (match &self (watched $userId $movieId) True))(if (== $isWatched (True))() ($title " - Recommended because you liked other movies directed by " $director) ))))))
 
-(= (recommendByCollaboration $userId)(collapse(match &self (likes $otherUser $genre)(if (== $userId $otherUser)()(match &self (likes $userId $genre)(match &self (watched $otherUser $movieId)(let $targetWatched (collapse (match &self (watched $userId $movieId) True))(if (== $targetWatched (True))()(match &self (movie $movieId Title $title Genre $movieGenre Director $director)(str $title " - Similar user (" $otherUser ") who likes " $genre " also watched this"))))))))))
+(= (recommendByCollaboration $userId)(collapse(match &self (likes $otherUser $genre)(if (== $userId $otherUser)()(match &self (likes $userId $genre)(match &self (watched $otherUser $movieId)(let $targetWatched (collapse (match &self (watched $userId $movieId) True))(if (== $targetWatched (True))()(match &self (movie $movieId Title $title Genre $movieGenre Director $director)($title " - Similar user (" $otherUser ") who likes " $genre " also watched this movie and loved it!"))))))))))
 
 
 
