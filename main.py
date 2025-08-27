@@ -42,11 +42,15 @@ def execute_query(query: str):
     
     #return [str(r) for r in result]
 
+
+
 # Load knowledge base first
 load_metta_file("knowledgeGraph.metta")
 
-# THEN query
-results1 = execute_query("!(recommend user1)")
-results2 = execute_query("!(recommendByDirector user1)")
-results3 = execute_query("!(recommendCollaborativeAdvanced user1)")
-print(results1, results2, results3)
+if __name__ == "__main__":
+
+    # THEN query
+    results1 = execute_query("!(recommend user1)")
+    results2 = execute_query("!(recommendByDirector user1)")
+    results3 = execute_query("!(recommendByCollaboration user1)")
+    print(results1, results2, results3)
