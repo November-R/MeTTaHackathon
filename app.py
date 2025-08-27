@@ -1,5 +1,5 @@
 from main import load_metta_file, execute_query
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import subprocess
 
 app = Flask(__name__)
@@ -7,7 +7,7 @@ app = Flask(__name__)
 #checking if Flask works
 @app.route("/")
 def hello():
-    return "Hello, Flask is working!"
+    return render_template("index.html")
 
 
 #routes
