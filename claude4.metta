@@ -165,7 +165,7 @@
 
 ; Test learning functions
 (getUserPreferences user1)
-(getWatchHistory user1)
+!(getWatchHistory user1)
 
 ; Example: Let user1 watch a Horror movie (new genre)
 ; This would be: !(watchMovie user1 Movie13)

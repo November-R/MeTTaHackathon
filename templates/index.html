@@ -1,53 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Movie Recommendation System</title>
-        <link rel="stylesheet" href=static/style.css>
-    </head>
-    <body>
-       <header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation System</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <header>
         <h1>Movie Recommender</h1>
-        <p>Are you looking for something good to watch...🤔😄?</p>
-       </header>
-       <div class="generalContainer">
-            <div class="userContainer" id="userContainer"></div>
-                <h2>Who is watching</h2>
-                <select>
-                    <option value="">Choose an option</option>
-                    <option value="user1">Jane</option>
-                    <option value="user2">Ophelia</option>
-                    <option value="user3">Angela</option>
-                </select>
-            </div>
-            <div class="userContainer" id="recommendationContainer">
-                <h2>Movies you need to watch ASAP</h2>
+        <p>Find movies you will love! 🎬</p>
+    </header>
 
-            </div>
-            <div class="userContainer" id="preferenceContainer">
-                <h2>Update your movie Preference</h2>
-                <input type="text" id="genreInput" placeholder="eg: Comedy, Action..." required>
-                <button type="Submit" id="btn">Update my preference</button>
-            </div>
-            <div class="userContainer" id="feedbackContainer">
-                <h2>Rate Movies</h2>
-                <input type="text" id="movieNameInput" placeholder="Movie name you want to rate">
-                <select>
-                    <option value="">Choose the ratings</option>
-                    <option value="">1 Absolutely Horrendus</option>
-                    <option value="">2 Just Bad</option>
-                    <option value="">3 its okay</option>
-                    <option value="">4 Amaizing</option>
-                    <option value="">5 Mindblowing and lifechanging</option>
+    <div class="generalContainer">
 
-                </select>
-            </div>
-            <div class="userContainer" id="historyContainer">
-                <h2>View your Watch history</h2>
-                <button type="Submit" id="btn">View my watch history</button>
-            </div>
-       </div>
-       <script src="static/script.js"></script>
-    </body>
+        <!-- User Selection -->
+        <div class="userContainer">
+            <h2>Who is watching?</h2>
+            <select id="userSelect">
+                <option value="">Choose a user</option>
+                <option value="user1">Jane</option>
+                <option value="user2">Ophelia</option>
+                <option value="user3">Angela</option>
+            </select>
+        </div>
+
+        <!-- Recommendation Buttons -->
+        <div class="userContainer">
+            <h2>Get Recommendations</h2>
+            <button id="byGenreBtn">By Genre</button>
+            <button id="byDirectorBtn">By Director</button>
+            <button id="byCollabBtn">Similar Users</button>
+        </div>
+
+        <!-- Recommendations Display -->
+        <div class="userContainer" id="recommendationContainer">
+            <h2>Recommended Movies</h2>
+            <ul id="recommendationList"></ul>
+        </div>
+
+        <!-- Update Preferences -->
+        <div class="userContainer">
+            <h2>Update Movie Preference</h2>
+            <input type="text" id="genreInput" placeholder="eg: Comedy, Action...">
+            <button id="updatePrefBtn">Update Preference</button>
+        </div>
+
+        <!-- Rate Movies -->
+        <div class="userContainer">
+            <h2>Rate Movies</h2>
+            <input type="text" id="movieNameInput" placeholder="Movie name">
+            <select id="ratingSelect">
+                <option value="">Choose a rating</option>
+                <option value="1">1 - Absolutely Horrendous</option>
+                <option value="2">2 - Just Bad</option>
+                <option value="3">3 - It's okay</option>
+                <option value="4">4 - Amazing</option>
+                <option value="5">5 - Mindblowing</option>
+            </select>
+            <button id="rateMovieBtn">Submit Rating</button>
+        </div>
+
+        <!-- Watch History -->
+        <div class="userContainer">
+            <h2>View Watch History</h2>
+            <button id="viewHistoryBtn">Show History</button>
+            <ul id="historyList"></ul>
+        </div>
+
+        <!-- User Preferences Display -->
+        <div class="userContainer">
+            <h2>Your Preferences</h2>
+            <ul id="preferencesList"></ul>
+        </div>
+
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
 </html>

@@ -1,16 +1,25 @@
 ; Movies and their attribute representation
+;comedy genre
 (movie Movie1 Title "Freaky Friday" Genre Comedy Director "Mark Waters")
 (movie Movie2 Title "The Addams" Genre Comedy Director "Barry Sonnenfeld")
 (movie Movie3 Title "Happy Gilmore" Genre Comedy Director "Dennis Dugan")
+
+;Scifi genre
 (movie Movie4 Title "The Matrix" Genre SciFi Director "Lana Wachowski")
 (movie Movie5 Title "Dune" Genre SciFi Director "Denis Villeneuve")
 (movie Movie6 Title "The Electric State" Genre SciFi Director "Anthony Russo")
+
+;Action gENRE
 (movie Movie7 Title "Avengers" Genre Action Director "Anthony Russo")
 (movie Movie8 Title "Captain America" Genre Action Director "Anthony Russo")
 (movie Movie9 Title "White House Down" Genre Action Director "Roland Emmerich")
+
+;Drama genre
 (movie Movie10 Title "Desperate Housewives" Genre Drama Director "Marc Cherry")
 (movie Movie11 Title "Challengers" Genre Drama Director "Luca Guadagnino")
 (movie Movie12 Title "Clueless" Genre Drama Director "Amy Heckerling")
+
+;horror genre
 (movie Movie13 Title "It" Genre Horror Director "Andres Muschietti")
 (movie Movie14 Title "Us" Genre Horror Director "Jordan Peele")
 (movie Movie15 Title "Get Out" Genre Horror Director "Jordan Peele")
@@ -42,12 +51,16 @@
 (likesDirector user3 "Anthony Russo")  ; From watching Avengers
 (likesDirector user3 "Marc Cherry")  ; From watching Desperate Housewives
 
-
-(= (recommend $userId)(collapse(match &self (movie $movieId Title $title Genre $genre Director $director)(match &self (likes $userId $genre)(let $isWatched (collapse (match &self (watched $userId $movieId) True))(if (== $isWatched (True))() ($title " - Recommended because you like " $genre " movies") ))))))
-
-(= (recommendByDirector $userId)(collapse(match &self (movie $movieId Title $title Genre $genre Director $director)(match &self (likesDirector $userId $director)(let $isWatched (collapse (match &self (watched $userId $movieId) True))(if (== $isWatched (True))() ($title " - Recommended because you liked other movies directed by " $director) ))))))
-
-(= (recommendByCollaboration $userId)(collapse(match &self (likes $otherUser $genre)(if (== $userId $otherUser)()(match &self (likes $userId $genre)(match &self (watched $otherUser $movieId)(let $targetWatched (collapse (match &self (watched $userId $movieId) True))(if (== $targetWatched (True))()(match &self (movie $movieId Title $title Genre $movieGenre Director $director)($title " - Similar user (" $otherUser ") who likes " $genre " also watched this movie and loved it!"))))))))))
-
-
-
+;apologies for our code
+; we know our code is not readable in one line but that was the only way we could parse and load it in python
+;we know parse_all is way more efficint but we could not make it work in time
+(= (getUserPreferences $userId)(collapse(match &self (likes $userId $genre)(" You like " $genre " movies."))))
+(getUserPreferences user1)
+(= (recommend $userId)(collapse(match &self (movie $movieId Title $title Genre $genre Director $director)(match &self (likes $userId $genre)(let $isWatched (collapse (match &self (watched $userId $movieId) True))(if (== $isWatched (True))() ("You need to watch " $title " - We know you like " $genre " movies. Give this a shot and ") ))))))
+(recommend user1)
+(= (recommendByDirector $userId)(collapse(match &self (movie $movieId Title $title Genre $genre Director $director)(match &self (likesDirector $userId $director)(let $isWatched (collapse (match &self (watched $userId $movieId) True))(if (== $isWatched (True))() ("You should watch " $title " - We have noticed you like movies directed by " $director "And guess what, he directed this too!") ))))))
+!(recommendByDirector user1)
+(= (recommendByCollaboration $userId)(collapse(match &self (likes $otherUser $genre)(if (== $userId $otherUser)()(match &self (likes $userId $genre)(match &self (watched $otherUser $movieId)(let $targetWatched (collapse (match &self (watched $userId $movieId) True))(if (== $targetWatched (True))()(match &self (movie $movieId Title $title Genre $movieGenre Director $director)("We recommend you watch " $title ". - Similar user who like " $genre " have watched this movie, loved it and rated it 10/10!Don't miss the hype"))))))))))
+!(recommendByCollaboration user1)
+(= (getWatchHistory $userId)(collapse(match &self (watched $userId $movieId)(match &self (movie $movieId Title $title Genre $genre Director $director)("You have watched: " $title " which is a/an " $genre "movie.")))))
+!(getWatchHistory user1)

@@ -31,6 +31,19 @@ def recommendByCollab(user_id):
     result3 = execute_query(query)
     return jsonify({"user" : user_id, "recommendations": result3})
 
+@app.route("/getUserPreferences/<user_id>", methods=["GET"])
+def userPreference(user_id):
+    query = f"!(getUserPreferences {user_id})"
+    result4 = execute_query(query)
+    return jsonify({"user" : user_id, "recommendations": result4})
+
+
+@app.route("/getWatchHistory/<user_id>", methods=["GET"])
+def userWatchHistory(user_id):
+    query = f"!(getWatchHistory {user_id})"
+    result5 = execute_query(query)
+    return jsonify({"user" : user_id, "recommendations": result5})
+
 
 @app.route("/query", methods=["POST"])
 def userInput():

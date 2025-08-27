@@ -57,4 +57,7 @@ if __name__ == "__main__":
     results1 = execute_query("!(recommend user1)")
     results2 = execute_query("!(recommendByDirector user1)")
     results3 = execute_query("!(recommendByCollaboration user1)")
-    print(results1, results2, results3)
+    results4 = execute_query("!(getWatchHistory $userId user1)")
+    results5 = execute_query("!(getUserPreferences user1)")
+
+    print(results1, results2, results3 , results4, results5)

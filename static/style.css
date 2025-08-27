@@ -1,3 +1,134 @@
-body{
-    background: ;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #202b3f;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-weight: 300;
+    color: #a0b4ff;
+}
+
+/* Container */
+.generalContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Each user container */
+.userContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2b3a57;
+    border: 1px solid #5064b9;
+    border-radius: 12px;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+}
+
+.userContainer:hover {
+    transform: translateY(-3px);
+}
+
+/* Headings inside containers */
+.userContainer h2 {
+    margin-bottom: 15px;
+}
+
+/* Inputs and selects */
+input, select {
+    font-size: 16px;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+    width: 80%;
+    max-width: 300px;
+}
+
+/* Input specific */
+input {
+    color: #000;
+}
+
+/* Buttons */
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #5064b9;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #08b6a4;
+    transform: translateY(-2px);
+}
+
+/* Recommendation & lists */
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+    text-align: left;
+    width: 90%;
+}
+
+ul li {
+    background-color: #364a7d;
+    margin: 5px 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+
+.movie-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stars-container {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 20px;
+    color: gold;
+    transition: transform 0.2s;
+}
+
+.star:hover {
+    transform: scale(1.2);
 }
