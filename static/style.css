@@ -13,7 +13,7 @@ body {
     padding: 20px;
 }
 
-/* Header */
+
 header {
     margin-bottom: 30px;
 }
@@ -28,7 +28,7 @@ header p {
     color: #a0b4ff;
 }
 
-/* Container */
+
 .generalContainer {
     display: flex;
     flex-direction: column;
@@ -36,7 +36,7 @@ header p {
     gap: 20px;
 }
 
-/* Each user container */
+
 .userContainer {
     display: flex;
     flex-direction: column;
@@ -55,12 +55,12 @@ header p {
     transform: translateY(-3px);
 }
 
-/* Headings inside containers */
+
 .userContainer h2 {
     margin-bottom: 15px;
 }
 
-/* Inputs and selects */
+
 input, select {
     font-size: 16px;
     padding: 10px;
@@ -71,12 +71,12 @@ input, select {
     max-width: 300px;
 }
 
-/* Input specific */
+
 input {
     color: #000;
 }
 
-/* Buttons */
+
 button {
     font-size: 16px;
     padding: 10px 20px;
@@ -93,7 +93,6 @@ button:hover {
     background-color: #08b6a4;
     transform: translateY(-2px);
 }
-
 /* Recommendation & lists */
 ul {
     list-style: none;
@@ -117,18 +116,3 @@ ul li {
     align-items: center;
 }
 
-.stars-container {
-    display: flex;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.star {
-    font-size: 20px;
-    color: gold;
-    transition: transform 0.2s;
-}
-
-.star:hover {
-    transform: scale(1.2);
-}
